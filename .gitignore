@@ -1,0 +1,5 @@
+
+bundleV2/*.mod_bundle
+.vscode/settings.json
+*.lua.processed
+*db_key.lua

@@ -1,0 +1,23 @@
+mod = [
+	"Lifes Hard Everywhere"
+]
+
+package = [
+	"resource_packages/Lifes Hard Everywhere/Lifes Hard Everywhere"
+]
+
+lua = [
+	"scripts/mods/Lifes Hard Everywhere/*"
+]
+
+unit = [
+  "units/*"
+]
+
+material = [
+  "materials/*"
+]  
+
+texture = [
+  "textures/*"
+]
