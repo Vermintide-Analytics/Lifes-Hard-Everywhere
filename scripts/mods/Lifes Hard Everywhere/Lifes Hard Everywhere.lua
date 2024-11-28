@@ -227,8 +227,8 @@ local get_damage_source_code = function(damage_source, is_ff, is_self, ff_breed_
 
 		return career_codes[ff_breed_name] or 1002
 	end
-
-	return special_damage_codes[damage_source] or enemy_codes[damage_source]
+	
+	return special_damage_codes[damage_source] or enemy_codes[damage_source:gsub("vs_", "")]
 end
 
 local num_players = 0
@@ -333,7 +333,8 @@ mod.event_phrases =
 	["test"]					= -1,
 	["VMT:Rebalance2022"]		= 1,
 	["OSCharity22"]				= 2,
-	["OSMay23"]					= 3
+	["OSMay23"]					= 3,
+	["OSVersusKickoff"]			= 4
 }
 local event_phrase = mod:get("event_phrase")
 local event = nil
@@ -346,7 +347,7 @@ end
 local get_bloodstain_unit_given_event = function(event_code)
 	if event_code == 2 then
 		return bloodstain_azure_unit_path
-	elseif event_code == 1 or event_code == 3 then
+	elseif event_code == 1 or event_code == 3 or event_code == 4 then
 		return bloodstain_golden_unit_path
 	end
 
@@ -356,7 +357,7 @@ end
 local get_pillar_unit_given_event = function(event_code)
 	if event_code == 2 then
 		return pillar_azure_unit_path
-	elseif event_code == 1 then
+	elseif event_code == 1 or event_code == 3 or event_code == 4 then
 		return pillar_golden_unit_path
 	end
 
@@ -1564,13 +1565,6 @@ mod.on_all_mods_loaded = function()
 		mod:set("startup_notice_event", nil)
 		mod:echo(startup_notice_event)
 		vmf.save_unsaved_settings_to_file()
-	end
-
-	if event_phrase == "VMT:Rebalance2022" then
-		clear_event()
-		--mod:echo("*** NOTICE ***")
-		--mod:echo("Are you participating in the Vermintide Modded Tournament: Rebalance? Enter the command seen in quotes below for the bloodstains you leave during the tournament to be golden and not be overwritten over time.")
-		--mod:echo("\"/lifeshardevent VMT:Rebalance2022\"")
 	end
 end
 
